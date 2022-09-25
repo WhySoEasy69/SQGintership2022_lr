@@ -47,7 +47,9 @@ class ConstantExpressionNode : public ExpressionNode
 {
 public:
     explicit ConstantExpressionNode(double value) : m_value(value) {}
-    double Compute() const override { return m_value; }
+    double Compute() const override { 
+        return m_value;
+    }
 
 private:
     double m_value{};

@@ -112,8 +112,6 @@ ExpressionNodePtr BuildExpressionForTokens(TokenVecIter beginToken, TokenVecIter
     const auto numTokens = std::distance(beginToken, endToken);
     if (numTokens == 1)
     {
- 
-       // добавил beginToken++ в switch 
         switch (beginToken->type)
         {
         case TokenType::Number:
@@ -158,7 +156,7 @@ ExpressionNodePtr BuildExpressionForTokens(TokenVecIter beginToken, TokenVecIter
         }
 
         // Прочитать вызов функции
-        const auto nextToken = std::next(beginToken); // не показывает значение при отладке  
+        const auto nextToken = std::next(beginToken);   
         if (beginToken->IsIdentifier() && nextToken != endToken && nextToken->IsOpenParenthesis())
         {
             std::vector<ExpressionNodePtr> children;
@@ -200,8 +198,7 @@ ExpressionNodePtr BuildExpressionForTokens(TokenVecIter beginToken, TokenVecIter
 
         // Прочитать одинокий токен
         const auto node = BuildExpressionForTokens(beginToken, std::next(beginToken));
-        beginToken++;                                                                       /// my add
-       // добавить beginToken++ сюда ?? 
+        beginToken++;                                                                       // my add
         nodesAndOperators.emplace_back(beginToken->offset, node);
     }
 

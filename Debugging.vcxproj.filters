@@ -9,6 +9,7 @@
   <ItemGroup>
     <Text Include="Input.txt" />
     <Text Include="Custom_test_case.txt" />
+    <Text Include="CHANGES.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".clang-format" />

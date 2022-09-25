@@ -1,0 +1,13 @@
+1) добавил beginToken++; (в случае обработки одинокого токена и последующего срабатывания switch case
+	выбрасывалось исключение т.к. итератор не сдвигался, и одна и та же позиция обрабатывалсь два раза) 
+	в file - ExpressionBuilder.cpp BuildExpressionForTokens
+
+2) изменил приоритет операций, * (file - Expression.cpp; static const std::set<OperatorInfo> sc_operators)
+   добавил ^, average()
+
+3) проверил случаи с inf и nan (теперь бросается исключение std::runtime_error("Result can not be nan or infinite")
+	и некорректное значение не сохраняется в переменную) 
+
+4) пробовал проверить программу на утечки памяти с помощью средств диагностики 
+	visual studio, но не получилось( 
+

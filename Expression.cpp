@@ -9,7 +9,7 @@ namespace
 {// почему не работает infinity 
 
 static std::unordered_map<std::string, double> s_variables;
-// * 1, 2, 2 mb 2, 2, 2 priority = 2? change priority * 1 to 2 
+
 static const std::set<OperatorInfo> sc_operators = {
     { "+", 1, 1, 2, [](const std::vector<double>& args) { return args.size() == 2 ? args[0] + args[1] : args[0]; } },
     { "-", 1, 1, 2, [](const std::vector<double>& args) { return args.size() == 2 ? args[0] - args[1] : -args[0]; } },
@@ -25,7 +25,6 @@ static const std::set<OperatorInfo> sc_operators = {
          return std::accumulate(args.begin(), args.end(), 0) / args.size();
      }}, //                  my add;
 };
-// min args min(args[0], args[1]); max(args[0], args[1]); ???
 }
 
 const OperatorInfo* FindOperator(const std::string& op)
@@ -67,6 +66,10 @@ double OperatorExpressionNode::Compute() const
 double AssignmentExpressionNode::Compute() const
 {
     const auto value = m_child->Compute();
+    if (std::isnan(value) || std::isinf(value))
+    {
+        throw std::runtime_error("Result can not be nan or infinite"); // my add
+    }
     s_variables[m_variable] = value;
     return value;
 }

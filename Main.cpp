@@ -8,8 +8,8 @@
 
 int main()
 {
-    //const auto lines = ReadFile("Input.txt");
-    const auto lines = ReadFile("Custom_test_case.txt"); 
+    const auto lines = ReadFile("Input.txt");
+    //const auto lines = ReadFile("Custom_test_case.txt"); 
     for (const auto& line : lines)
     {
         try
@@ -17,11 +17,11 @@ int main()
             const auto tokens = Tokenize(line);
             const auto expression = BuildExpression(tokens);
             const auto tmp = expression->Compute(); 
-            //const auto result = expression->Compute();
-            if (std::isnan(tmp) || std::isinf(tmp))
+             if (std::isnan(tmp) || std::isinf(tmp))
             {
-                throw std::runtime_error("Result can not be nan or infinite");      // my add
+                throw std::runtime_error("Result can not be nan or infinite"); // my add
             }
+            //const auto result = expression->Compute();
             const auto result = tmp; 
             std::cout << "> " << line << std::endl;
             std::cout << "  = " << result << std::endl;
