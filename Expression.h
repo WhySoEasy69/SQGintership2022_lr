@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-using OperatorFunction = std::function<double(const std::vector<double>& args)>;
+using OperatorFunction = std::function<double(const std::vector<double>& args)>; //          ???? 
 
 // Структура, которая описывает оператор: как математические операции, так и функции
 struct OperatorInfo

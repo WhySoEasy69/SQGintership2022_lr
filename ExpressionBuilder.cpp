@@ -112,6 +112,8 @@ ExpressionNodePtr BuildExpressionForTokens(TokenVecIter beginToken, TokenVecIter
     const auto numTokens = std::distance(beginToken, endToken);
     if (numTokens == 1)
     {
+ 
+       // добавил beginToken++ в switch 
         switch (beginToken->type)
         {
         case TokenType::Number:
@@ -156,7 +158,7 @@ ExpressionNodePtr BuildExpressionForTokens(TokenVecIter beginToken, TokenVecIter
         }
 
         // Прочитать вызов функции
-        const auto nextToken = std::next(beginToken);
+        const auto nextToken = std::next(beginToken); // не показывает значение при отладке  
         if (beginToken->IsIdentifier() && nextToken != endToken && nextToken->IsOpenParenthesis())
         {
             std::vector<ExpressionNodePtr> children;
@@ -185,7 +187,7 @@ ExpressionNodePtr BuildExpressionForTokens(TokenVecIter beginToken, TokenVecIter
             {
                 throw SyntaxError(beginToken->offset, "Unknown function");
             }
-            if (children.size() < operatorInfo->minArgs || children.size() > operatorInfo->maxArgs)
+            if (children.size() < operatorInfo->minArgs || (children.size() > operatorInfo->maxArgs && operatorInfo->name != "average"))       // add != average
             {
                 throw SyntaxError(beginToken->offset, "Unexpected number of function arguments");
             }
@@ -198,6 +200,8 @@ ExpressionNodePtr BuildExpressionForTokens(TokenVecIter beginToken, TokenVecIter
 
         // Прочитать одинокий токен
         const auto node = BuildExpressionForTokens(beginToken, std::next(beginToken));
+        beginToken++;                                                                       /// my add
+       // добавить beginToken++ сюда ?? 
         nodesAndOperators.emplace_back(beginToken->offset, node);
     }
 

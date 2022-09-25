@@ -8,6 +8,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Input.txt" />
+    <Text Include="Custom_test_case.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".clang-format" />

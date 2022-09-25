@@ -6,7 +6,7 @@ namespace
 {
 
 // Список специальных символов, допустимых в выражении (кроме символа комментария)
-static const std::string sc_specialSymbols = "()+-*/=,";
+static const std::string sc_specialSymbols = "()+-*/=,^";                   // add ^ symbol   
 
 bool IsSpace(char ch) { return std::isspace(static_cast<unsigned char>(ch)); }
 bool IsDigit(char ch) { return std::isdigit(static_cast<unsigned char>(ch)); }
@@ -112,7 +112,7 @@ TokenVec Tokenize(const std::string& line)
         }
 
         // Прочитать специальный символ
-        if (sc_specialSymbols.find(*ptr) != std::string::npos)
+        if (sc_specialSymbols.find(*ptr) != std::string::npos) // ptr != end ????
         {
             Token token{ TokenType::Symbol, offset };
             token.symbol = *ptr;

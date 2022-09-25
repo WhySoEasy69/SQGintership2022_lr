@@ -145,6 +145,7 @@
     <ClCompile Include="Tokenizer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="Custom_test_case.txt" />
     <Text Include="Input.txt" />
   </ItemGroup>
   <ItemGroup>

@@ -3,23 +3,29 @@
 #include <set>
 #include <stdexcept>
 #include <unordered_map>
+#include <numeric> // my add
 
 namespace
-{
+{// почему не работает infinity 
 
 static std::unordered_map<std::string, double> s_variables;
-
+// * 1, 2, 2 mb 2, 2, 2 priority = 2? change priority * 1 to 2 
 static const std::set<OperatorInfo> sc_operators = {
     { "+", 1, 1, 2, [](const std::vector<double>& args) { return args.size() == 2 ? args[0] + args[1] : args[0]; } },
     { "-", 1, 1, 2, [](const std::vector<double>& args) { return args.size() == 2 ? args[0] - args[1] : -args[0]; } },
-    { "*", 1, 2, 2, [](const std::vector<double>& args) { return args[0] * args[1]; } },
+    { "*", 2, 2, 2, [](const std::vector<double>& args) { return args[0] * args[1]; } },
     { "/", 2, 2, 2, [](const std::vector<double>& args) { return args[0] / args[1]; } },
     { "sin", 0, 1, 1, [](const std::vector<double>& args) { return std::sin(args[0]); } },
     { "cos", 0, 1, 1, [](const std::vector<double>& args) { return std::cos(args[0]); } },
     { "min", 0, 2, 2, [](const std::vector<double>& args) { return std::min(args[0], args[0]); } },
     { "max", 0, 2, 2, [](const std::vector<double>& args) { return std::max(args[1], args[1]); } },
+    {"^", 3, 2, 2, [](const std::vector<double> &args) { return std::pow(args[0], args[1]); } }, 
+    {"average", 0, 1, std::numeric_limits<unsigned>::infinity(),
+     [](const std::vector<double> &args) {
+         return std::accumulate(args.begin(), args.end(), 0) / args.size();
+     }}, //                  my add;
 };
-
+// min args min(args[0], args[1]); max(args[0], args[1]); ???
 }
 
 const OperatorInfo* FindOperator(const std::string& op)
