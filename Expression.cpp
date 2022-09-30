@@ -17,12 +17,12 @@ static const std::set<OperatorInfo> sc_operators = {
     { "/", 2, 2, 2, [](const std::vector<double>& args) { return args[0] / args[1]; } },
     { "sin", 0, 1, 1, [](const std::vector<double>& args) { return std::sin(args[0]); } },
     { "cos", 0, 1, 1, [](const std::vector<double>& args) { return std::cos(args[0]); } },
-    { "min", 0, 2, 2, [](const std::vector<double>& args) { return std::min(args[0], args[0]); } },
-    { "max", 0, 2, 2, [](const std::vector<double>& args) { return std::max(args[1], args[1]); } },
+    { "min", 0, 2, 2, [](const std::vector<double>& args) { return std::min(args[0], args[1]); } },
+    { "max", 0, 2, 2, [](const std::vector<double>& args) { return std::max(args[0], args[1]); } },
     {"^", 3, 2, 2, [](const std::vector<double> &args) { return std::pow(args[0], args[1]); } }, 
     {"average", 0, 1, std::numeric_limits<unsigned>::infinity(),
      [](const std::vector<double> &args) {
-         return std::accumulate(args.begin(), args.end(), 0) / args.size();
+         return std::accumulate(args.begin(), args.end(), 0.0) / (args.size() + 0.0);
      }}, //                  my add;
 };
 }

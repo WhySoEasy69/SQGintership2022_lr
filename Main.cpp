@@ -1,4 +1,9 @@
 ﻿#pragma once
+#define _CRTDBG_MAP_ALLOC
+#include <crtdbg.h>
+#define DBG_NEW new (_NORMAL_BLOCK, __FILE__, __LINE__)
+#define newDBG_NEW
+
 
 #include "Tokenizer.h"
 #include "Expression.h"
@@ -9,13 +14,14 @@
 int main()
 {
     //const auto lines = ReadFile("Input.txt");
-    //const auto lines = ReadFile("Custom_test_case.txt"); 
-    const auto lines = ReadFile("Debug_test_case.txt"); 
+    const auto lines = ReadFile("Custom_test_case.txt"); 
+    //const auto lines = ReadFile("Debug_test_case.txt"); 
     for (const auto& line : lines)
     {
         try
         {
             const auto tokens = Tokenize(line);
+            if (tokens.size() == 0) continue; 
             const auto expression = BuildExpression(tokens);
             const auto tmp = expression->Compute(); 
              if (std::isnan(tmp) || std::isinf(tmp))
@@ -42,5 +48,8 @@ int main()
             std::cout << std::endl;
         }
     }
+
+    _CrtDumpMemoryLeaks();
+
     return 0;
 }
