@@ -10,6 +10,7 @@
     <Text Include="Input.txt" />
     <Text Include="Custom_test_case.txt" />
     <Text Include="CHANGES.txt" />
+    <Text Include="Debug_test_case.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".clang-format" />

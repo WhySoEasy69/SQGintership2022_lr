@@ -147,6 +147,7 @@
   <ItemGroup>
     <Text Include="CHANGES.txt" />
     <Text Include="Custom_test_case.txt" />
+    <Text Include="Debug_test_case.txt" />
     <Text Include="Input.txt" />
   </ItemGroup>
   <ItemGroup>

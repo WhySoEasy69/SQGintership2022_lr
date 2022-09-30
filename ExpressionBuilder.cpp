@@ -105,7 +105,7 @@ void CollapseExpression(std::vector<ExpressionNodeOrOperator>& nodesAndOperators
 
 ExpressionNodePtr BuildExpressionForTokens(TokenVecIter beginToken, TokenVecIter endToken)
 {
-    if (beginToken == endToken)
+     if (beginToken == endToken)
         throw std::logic_error("There's no token to process");
 
     // Прочитать переменную или константу
@@ -114,7 +114,7 @@ ExpressionNodePtr BuildExpressionForTokens(TokenVecIter beginToken, TokenVecIter
     {
         switch (beginToken->type)
         {
-        case TokenType::Number:
+        case TokenType::Number: 
             return std::make_shared<ConstantExpressionNode>(beginToken->number);
         case TokenType::Identifier:
             return std::make_shared<VariableExpressionNode>(beginToken->identifier);
@@ -130,6 +130,8 @@ ExpressionNodePtr BuildExpressionForTokens(TokenVecIter beginToken, TokenVecIter
         // Прочитать символ оператора
         if (beginToken->IsOperator())
         {
+            if (nodesAndOperators.empty() && (beginToken->symbol == '*' || beginToken->symbol == '/'))
+                throw SyntaxError(beginToken->offset, "Unexpected symbol"); 
             if (!nodesAndOperators.empty() && nodesAndOperators.back().IsOperator())
                 throw SyntaxError(beginToken->offset, "Unexpected symbol");
 
@@ -198,8 +200,9 @@ ExpressionNodePtr BuildExpressionForTokens(TokenVecIter beginToken, TokenVecIter
 
         // Прочитать одинокий токен
         const auto node = BuildExpressionForTokens(beginToken, std::next(beginToken));
-        beginToken++;                                                                       // my add
+        //beginToken++;                                                                       // my add
         nodesAndOperators.emplace_back(beginToken->offset, node);
+        beginToken++; 
     }
 
     if (nodesAndOperators.back().IsOperator())

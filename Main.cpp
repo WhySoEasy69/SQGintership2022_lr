@@ -8,8 +8,9 @@
 
 int main()
 {
-    const auto lines = ReadFile("Input.txt");
+    //const auto lines = ReadFile("Input.txt");
     //const auto lines = ReadFile("Custom_test_case.txt"); 
+    const auto lines = ReadFile("Debug_test_case.txt"); 
     for (const auto& line : lines)
     {
         try
