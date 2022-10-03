@@ -1,5 +1,4 @@
-﻿#pragma once
-#define _CRTDBG_MAP_ALLOC
+﻿#define _CRTDBG_MAP_ALLOC
 #include <crtdbg.h>
 #define DBG_NEW new (_NORMAL_BLOCK, __FILE__, __LINE__)
 #define newDBG_NEW
@@ -14,8 +13,8 @@
 int main()
 {
     //const auto lines = ReadFile("Input.txt");
-    const auto lines = ReadFile("Custom_test_case.txt"); 
-    //const auto lines = ReadFile("Debug_test_case.txt"); 
+    //const auto lines = ReadFile("Custom_test_case.txt"); 
+    const auto lines = ReadFile("Debug_test_case.txt"); 
     for (const auto& line : lines)
     {
         try

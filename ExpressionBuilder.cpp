@@ -96,7 +96,7 @@ void CollapseExpression(std::vector<ExpressionNodeOrOperator>& nodesAndOperators
     }
 
     const std::vector<ExpressionNodePtr> children{ nodesAndOperators[i - 1].node, nodesAndOperators[i + 1].node };
-    auto node = std::make_shared<OperatorExpressionNode>(children, operatorInfo->fn);
+    auto node = std::make_shared<OperatorExpressionNode>(children, operatorInfo->fn);   // проверить 
 
     auto begin = std::next(nodesAndOperators.begin(), i - 1);
     begin = nodesAndOperators.erase(begin, std::next(begin, 3));
@@ -192,7 +192,7 @@ ExpressionNodePtr BuildExpressionForTokens(TokenVecIter beginToken, TokenVecIter
                 throw SyntaxError(beginToken->offset, "Unexpected number of function arguments");
             }
 
-            auto node = std::make_shared<OperatorExpressionNode>(children, operatorInfo->fn);
+            auto node = std::make_shared<OperatorExpressionNode>(children, operatorInfo->fn);  // проверить 
             nodesAndOperators.emplace_back(beginToken->offset, node);
             beginToken = std::next(parameterEnd);
             continue;
@@ -222,7 +222,7 @@ ExpressionNodePtr BuildExpressionForTokens(TokenVecIter beginToken, TokenVecIter
         }
 
         const std::vector<ExpressionNodePtr> children{ operand };
-        auto node = std::make_shared<OperatorExpressionNode>(children, operatorInfo->fn);
+        auto node = std::make_shared<OperatorExpressionNode>(children, operatorInfo->fn);  // проверить 
 
         nodesAndOperators.erase(nodesAndOperators.begin(), std::next(nodesAndOperators.begin(), 2));
         nodesAndOperators.emplace(nodesAndOperators.begin(), offset, node);
@@ -267,5 +267,5 @@ ExpressionNodePtr BuildExpression(const TokenVec& tokens)
     const auto expression = BuildExpressionForTokens(beginToken, tokens.end());
     return outputVariable.empty()
                ? expression
-               : std::make_shared<AssignmentExpressionNode>(expression, outputVariable);
+               : std::make_shared<AssignmentExpressionNode>(expression, outputVariable); // проверить 
 }

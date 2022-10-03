@@ -12,7 +12,7 @@ static std::unordered_map<std::string, double> s_variables;
 
 static const std::set<OperatorInfo> sc_operators = {
     { "+", 1, 1, 2, [](const std::vector<double>& args) { return args.size() == 2 ? args[0] + args[1] : args[0]; } },
-    { "-", 1, 1, 2, [](const std::vector<double>& args) { return args.size() == 2 ? args[0] - args[1] : -args[0]; } },
+    { "-", 1, 1, 2, [](const std::vector<double>& args) { return args.size() == 2 ? args[0] - args[1] + 0.0 : -args[0]; } },
     { "*", 2, 2, 2, [](const std::vector<double>& args) { return args[0] * args[1]; } },
     { "/", 2, 2, 2, [](const std::vector<double>& args) { return args[0] / args[1]; } },
     { "sin", 0, 1, 1, [](const std::vector<double>& args) { return std::sin(args[0]); } },
@@ -26,6 +26,8 @@ static const std::set<OperatorInfo> sc_operators = {
      }}, //                  my add;
 };
 }
+
+//ExpressionNode::~ExpressionNode(){}; // my add
 
 const OperatorInfo* FindOperator(const std::string& op)
 {
@@ -73,3 +75,15 @@ double AssignmentExpressionNode::Compute() const
     s_variables[m_variable] = value;
     return value;
 }
+
+/* AssignmentExpressionNode::~AssignmentExpressionNode()
+{
+    m_child.reset(); 
+ };
+
+  OperatorExpressionNode::~OperatorExpressionNode() {
+      for (auto ptr : m_children){
+          ptr.reset(); 
+      }
+  };
+  */

@@ -37,8 +37,11 @@ int GetPriority(char ch);
 class ExpressionNode
 {
 public:
+    //virtual ~ExpressionNode() = 0;      // my add
     virtual double Compute() const = 0;
 };
+
+//ExpressionNode::~ExpressionNode(){}; 
 
 using ExpressionNodePtr = std::shared_ptr<ExpressionNode>;
 
@@ -77,6 +80,8 @@ public:
 
     double Compute() const override;
 
+    //~OperatorExpressionNode() override;
+
 private:
     std::vector<ExpressionNodePtr> m_children;
     OperatorFunction m_op;
@@ -92,6 +97,8 @@ public:
     }
 
     double Compute() const override;
+
+    //~AssignmentExpressionNode() override;
 
 private:
     ExpressionNodePtr m_child;
